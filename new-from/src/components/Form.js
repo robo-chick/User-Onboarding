@@ -24,7 +24,8 @@ export default function Form() {
         name: "",
         email: "",
         password: "",
-        terms: false
+        terms: false,
+        role: ""
     });
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -42,7 +43,8 @@ export default function Form() {
         name: "",
         email: "",
         password: "",
-        terms: ""
+        terms: "",
+        role: ""
     });
 
     const validate = e => {
@@ -121,6 +123,22 @@ export default function Form() {
                 />
                 {errorState.password.length > 7 ? (<p className="error">{errorState.password}</p>) : null}
             </label>
+            <label htmlFor="role">
+        What is your role?
+        <select
+          value={formState.role}
+          name="role"
+          id="role"
+          onChange={inputChange}
+        >
+          <option value="Front-End Developer">Front-End Developer</option>
+          <option value="Back-End Developer">Back-End Developer</option>
+          <option value="Administrative Staff">Administrative Staff</option>
+        </select>
+        {errorState.role.length > 0 ? (
+          <p className="error">{errorState.role}</p>
+        ) : null}
+      </label>
             <label htmlFor="terms">
                 <input
                 type="checkbox"
@@ -132,7 +150,7 @@ export default function Form() {
                 Terms & Conditions
                 {errorState.terms.length > 0 ? (<p className="error">{errorState.terms}</p>) : null}
             </label>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
+            <pre>{JSON.stringify(user, ["name","email","role"])}</pre> 
             <button disabled={buttonDisabled}>Submit</button>
         </form>
     )
