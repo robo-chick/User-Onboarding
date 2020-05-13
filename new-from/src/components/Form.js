@@ -29,12 +29,14 @@ export default function Form() {
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
+    const [user, setUser] = useState([]);
+
     useEffect(() => {
         formSchema.isValid(formState)
         .then(valid => {
             setButtonDisabled(!valid);
         })
-    }, [formState])
+    }, [formState]);
 
     const [errorState, setErrorState] = useState({
         name: "",
@@ -78,8 +80,11 @@ export default function Form() {
         console.log("Form Submitted");
         axios
           .post("https://reqres.in/api/users", formState)
-          .then(response => console.log(response))
-          .catch(err => console.log(err))
+          .then(response => {
+              setUser(response.data);
+              console.log("Success", response)
+          })
+          .catch(err => console.log(err.response))
     };
 
     return (
@@ -127,6 +132,7 @@ export default function Form() {
                 Terms & Conditions
                 {errorState.terms.length > 0 ? (<p className="error">{errorState.terms}</p>) : null}
             </label>
+            <pre>{JSON.stringify(user, null, 2)}</pre>
             <button disabled={buttonDisabled}>Submit</button>
         </form>
     )
