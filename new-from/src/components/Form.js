@@ -16,7 +16,8 @@ const formSchema = yup.object().shape({
     .required("Must include password"),
     terms: yup
     .boolean()
-    .oneOf([true], "Please agree to Terms & Conditions")
+    .oneOf([true], "Please agree to Terms & Conditions"),
+    role: yup.string()
 });
 
 export default function Form() {
@@ -30,7 +31,7 @@ export default function Form() {
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState();
 
     useEffect(() => {
         formSchema.isValid(formState)
