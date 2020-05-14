@@ -54,7 +54,7 @@ export default function Form() {
       yup
         .reach(formSchema, e.target.name)
         .validate(value)
-        .then(valid => {
+        .then(value => {
             setErrorState({
                 ...errorState,
                 [e.target.name]: ""
