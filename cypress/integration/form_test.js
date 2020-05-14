@@ -25,11 +25,13 @@ describe("Testing form inputs", () => {
     });
 
     it("check if user can check checkbox", () => {
-        cy.get('input[type="checkbox"]').check().should("be.checked");
+        cy.get('input[type="checkbox"]').check().should("be.checked")
+        cy.get('input[type="checkbox"]').uncheck();
     });
 
     it("check submit", () => {
-        cy.get('form').submit()
-    })
+        cy.get('form').submit();
+    });
     
 })
+
