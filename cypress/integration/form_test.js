@@ -21,7 +21,10 @@ describe("Testing form inputs", () => {
 
     it("input password into password input", () => {
         cy.get('input[name="password"]')
-        .type("cjso3ofg");
+        .type("cjso3ofg")
+        .clear();
+        cy.get('input[name="password"]')
+        cy.contains("Password must be at least 7 characters long")
     });
 
     it("check if user can check checkbox", () => {
